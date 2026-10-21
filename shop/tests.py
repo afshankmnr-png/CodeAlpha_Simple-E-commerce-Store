@@ -13,5 +13,6 @@ class ProductModelTest(TestCase):
         )
 
         self.assertEqual(product.name, "Headphones")
-        self.assertEqual(product.price, 999)
+        self.assertEqual(str(product.price), "999.00")
         self.assertEqual(product.stock, 10)
+
