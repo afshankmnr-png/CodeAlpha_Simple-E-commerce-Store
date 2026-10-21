@@ -23,3 +23,11 @@ jobs:
 
       - name: Check Django configuration
         run: python manage.py check
+
+      - name: Run database migrations
+        run: python manage.py migrate --noinput
+
+      - name: Run product tests
+        run: python manage.py test shop
+
+
