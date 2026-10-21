@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My E-commerce Store</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f4f6f9;
+        }
+
+        h1 {
+            text-align: center;
+            color: #222;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .product {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #ddd;
+        }
+
+        .product img {
+            width: 100%;
+            height: 160px;
+            object-fit: contain;
+        }
+
+        .price {
+            color: #087f23;
+            font-weight: bold;
+        }
+
+        a {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 10px 14px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>My E-commerce Store</h1>
+
+    <div class="products">
+        {% for product in products %}
+        <div class="product">
+            {% if product.image_url %}
+            <img src="{{ product.image_url }}" alt="{{ product.name }}">
+            {% endif %}
+
+            <h2>{{ product.name }}</h2>
+            <p>{{ product.description }}</p>
+            <p class="price">₹{{ product.price }}</p>
+            <p>Stock: {{ product.stock }}</p>
+
+            <a href="{% url 'product_detail' product.id %}">
+                View Details
+            </a>
+        </div>
+        {% empty %}
+        <p>No products available yet.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
