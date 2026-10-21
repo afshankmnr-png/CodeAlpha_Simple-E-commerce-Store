@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My E-Commerce Store</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            text-align: center;
+        }
+        header {
+            background: #2563eb;
+            color: white;
+            padding: 20px;
+        }
+        .products {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding: 30px;
+        }
+        .product {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 220px;
+        }
+        button {
+            background: #2563eb;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My E-Commerce Store</h1>
+        <p>Shop your favourite products!</p>
+        <h3>Cart: <span id="count">0</span></h3>
+    </header>
+
+    <div class="products">
+        <div class="product">
+            <h2>Headphones</h2>
+            <p>Price: ₹999</p>
+            <button onclick="addToCart()">Add to Cart</button>
+        </div>
+
+        <div class="product">
+            <h2>Smart Watch</h2>
+            <p>Price: ₹1499</p>
+            <button onclick="addToCart()">Add to Cart</button>
+        </div>
+
+        <div class="product">
+            <h2>Keyboard</h2>
+            <p>Price: ₹799</p>
+            <button onclick="addToCart()">Add to Cart</button>
+        </div>
+    </div>
+
+    <script>
+        let cartCount = 0;
+
+        function addToCart() {
+            cartCount++;
+            document.getElementById("count").textContent = cartCount;
+            alert("Product added to cart!");
+        }
+    </script>
+</body>
+</html>
