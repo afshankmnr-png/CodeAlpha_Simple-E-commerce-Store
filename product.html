@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - My Store</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Product Details</h1>
+        <a href="index.html" style="color:white;">Back to Store</a>
+        <p>Cart: <span id="count">0</span></p>
+        <button onclick="showCart()">View Cart</button>
+    </header>
+
+    <div class="products">
+        <div class="product">
+            <h2>Wireless Headphones</h2>
+            <p>Comfortable wireless headphones.</p>
+            <p>Price: ₹999</p>
+            <button onclick="addToCart('Headphones', 999)">
+                Add to Cart
+            </button>
+        </div>
+
+        <div class="product">
+            <h2>Smart Watch</h2>
+            <p>A smart watch for everyday use.</p>
+            <p>Price: ₹1499</p>
+            <button onclick="addToCart('Smart Watch', 1499)">
+                Add to Cart
+            </button>
+        </div>
+
+        <div class="product">
+            <h2>Keyboard</h2>
+            <p>A keyboard for work and study.</p>
+            <p>Price: ₹799</p>
+            <button onclick="addToCart('Keyboard', 799)">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+</body>
+</html>
