@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #222;
+        }
+
+        .message {
+            text-align: center;
+            color: #555;
+            padding: 20px;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .button {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛒 Your Shopping Cart</h1>
+
+        <p class="message">
+            Your cart page is ready for the next step.
+        </p>
+
+        <p style="text-align: center;">
+            <a class="button" href="{% url 'product_list' %}">
+                Continue Shopping
+            </a>
+        </p>
+    </div>
+</body>
+</html>
