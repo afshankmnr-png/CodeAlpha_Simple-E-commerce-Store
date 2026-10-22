@@ -89,6 +89,23 @@ def cart_view(request):
         {"cart_items": cart_items, "total": total},
     )
     
+def add_to_cart(request, product_id):
+    if request.method == "POST":
+        product = get_object_or_404(Product, id=product_id)
+
+        cart = request.session.get("cart", {})
+        product_id_str = str(product.id)
+
+        current_quantity = int(cart.get(product_id_str, 0))
+
+        if current_quantity < product.stock:
+            cart[product_id_str] = current_quantity + 1
+
+        request.session["cart"] = cart
+
+    return redirect("cart")
+
+    
 
 
 
