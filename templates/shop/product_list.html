@@ -54,6 +54,13 @@
 </head>
 <body>
     <h1>My E-commerce Store</h1>
+    
+<p style="text-align: center;">
+    <a href="{% url 'cart' %}">🛒 View Cart</a>
+    |
+    <a href="{% url 'product_list' %}">Home</a>
+</p>
+
 
     <div class="products">
         {% for product in products %}
