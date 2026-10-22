@@ -9,12 +9,11 @@
         body {
             font-family: Arial, sans-serif;
             background: #f4f4f4;
-            margin: 0;
             padding: 20px;
         }
 
         .container {
-            max-width: 700px;
+            max-width: 750px;
             margin: 30px auto;
             background: white;
             padding: 25px;
@@ -23,26 +22,26 @@
 
         h1 {
             text-align: center;
-            color: #222;
         }
 
-        .message {
-            text-align: center;
-            color: #555;
-            padding: 20px;
-        }
-
-        a {
-            color: #007bff;
-            text-decoration: none;
+        .item {
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
         }
 
         .button {
             display: inline-block;
+            padding: 10px 15px;
+            margin: 8px 5px 0 0;
             background: #007bff;
             color: white;
-            padding: 10px 18px;
+            text-decoration: none;
             border-radius: 5px;
+        }
+
+        .empty {
+            text-align: center;
+            color: #666;
         }
     </style>
 </head>
@@ -50,18 +49,30 @@
     <div class="container">
         <h1>🛒 Your Shopping Cart</h1>
 
-        <p class="message">
-            Your cart page is ready for the next step.
-        </p>
+        {% if cart_items %}
+            {% for item in cart_items %}
+                <div class="item">
+                    <h3>{{ item.product.name }}</h3>
+                    <p>Price: ₹{{ item.product.price }}</p>
+                    <p>Quantity: {{ item.quantity }}</p>
+                    <p>Subtotal: ₹{{ item.subtotal }}</p>
+                </div>
+            {% endfor %}
 
-        <p style="text-align: center;">
-            <a class="button" href="{% url 'product_list' %}">
-                Continue Shopping
-            </a>
+            <h2>Total: ₹{{ total }}</h2>
+
             <a class="button" href="{% url 'checkout' %}">
-    Proceed to Checkout
-</a>
-        </p>
+                Proceed to Checkout
+            </a>
+        {% else %}
+            <p class="empty">Your cart is empty.</p>
+        {% endif %}
+
+        <a class="button" href="{% url 'product_list' %}">
+            Continue Shopping
+        </a>
     </div>
 </body>
 </html>
+
+
