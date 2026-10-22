@@ -77,6 +77,12 @@
             <a href="{% url 'product_detail' product.id %}">
                 View Details
             </a>
+            
+<form action="{% url 'add_to_cart' product.id %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Add to Cart 🛒</button>
+</form>
+
         </div>
         {% empty %}
         <p>No products available yet.</p>
