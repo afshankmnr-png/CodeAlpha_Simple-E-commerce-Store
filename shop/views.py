@@ -63,9 +63,33 @@ def logout_view(request):
 def checkout_view(request):
     return render(request, "shop/checkout.html")
   
-    
+
 def cart_view(request):
-    return render(request, "shop/cart.html")
+    cart = request.session.get("cart", {})
+    cart_items = []
+    total = 0
+
+    for product_id, quantity in cart.items():
+        product = Product.objects.filter(id=product_id).first()
+
+        if product:
+            quantity = int(quantity)
+            subtotal = product.price * quantity
+            total += subtotal
+
+            cart_items.append({
+                "product": product,
+                "quantity": quantity,
+                "subtotal": subtotal,
+            })
+
+    return render(
+        request,
+        "shop/cart.html",
+        {"cart_items": cart_items, "total": total},
+    )
+    
+
 
 
 
