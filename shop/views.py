@@ -59,6 +59,10 @@ def logout_view(request):
     from django.contrib.auth import logout
     logout(request)
     return redirect("product_list")
+  
+def checkout_view(request):
+    return render(request, "shop/checkout.html")
+  
     
 def cart_view(request):
     return render(request, "shop/cart.html")
