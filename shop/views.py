@@ -105,6 +105,26 @@ def add_to_cart(request, product_id):
 
     return redirect("cart")
 
+def update_cart(request, product_id):
+    if request.method == "POST":
+        product = get_object_or_404(Product, id=product_id)
+        cart = request.session.get("cart", {})
+        product_id_str = str(product.id)
+
+        try:
+            quantity = int(request.POST.get("quantity", 1))
+        except (ValueError, TypeError):
+            quantity = 1
+
+        if quantity <= 0:
+            cart.pop(product_id_str, None)
+        elif quantity <= product.stock:
+            cart[product_id_str] = quantity
+
+        request.session["cart"] = cart
+
+    return redirect("cart")
+
     
 
 
