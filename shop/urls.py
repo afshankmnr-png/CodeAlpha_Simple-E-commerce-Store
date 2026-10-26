@@ -19,6 +19,13 @@ urlpatterns = [
     name="add_to_cart",
 ),
     
+path(
+    "update-cart/<int:product_id>/",
+    views.update_cart,
+    name="update_cart",
+),
+
+    
 path("checkout/", views.checkout_view, name="checkout"),
 
 ]
