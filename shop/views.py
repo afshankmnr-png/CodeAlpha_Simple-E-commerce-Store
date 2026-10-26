@@ -60,8 +60,81 @@ def logout_view(request):
     logout(request)
     return redirect("product_list")
   
+
+from django.contrib.auth.decorators import login_required
+from django.db import transaction
+from django.contrib import messages
+from decimal import Decimal
+
+@login_required
 def checkout_view(request):
+    cart = request.session.get("cart", {})
+    cart_items = []
+
+    for product_id, quantity in cart.items():
+        product = Product.objects.filter(id=product_id).first()
+
+        if product:
+            quantity = int(quantity)
+
+            if quantity > 0 and quantity <= product.stock:
+                cart_items.append((product, quantity))
+
+    if not cart_items:
+        messages.error(request, "Your cart is empty or unavailable.")
+        return redirect("cart")
+
+    if request.method == "POST":
+        with transaction.atomic():
+            total = Decimal("0.00")
+
+            for product, quantity in cart_items:
+                product = Product.objects.select_for_update().get(
+                    id=product.id
+                )
+
+                if quantity > product.stock:
+                    messages.error(
+                        request,
+                        "Stock changed. Please review your cart."
+                    )
+                    return redirect("cart")
+
+                total += product.price * quantity
+
+            order = Order.objects.create(
+                user=request.user,
+                total=total,
+            )
+
+            for product, quantity in cart_items:
+                product = Product.objects.select_for_update().get(
+                    id=product.id
+                )
+
+                if quantity > product.stock:
+                    messages.error(
+                        request,
+                        "Stock changed. Please review your cart."
+                    )
+                    return redirect("cart")
+
+                OrderItem.objects.create(
+                    order=order,
+                    product=product,
+                    quantity=quantity,
+                    price=product.price,
+                )
+
+                product.stock -= quantity
+                product.save(update_fields=["stock"])
+
+        request.session["cart"] = {}
+        messages.success(request, "Your order was placed successfully!")
+        return redirect("product_list")
+
     return render(request, "shop/checkout.html")
+
   
 
 def cart_view(request):
