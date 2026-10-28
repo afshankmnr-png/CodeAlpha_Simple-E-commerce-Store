@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My E-commerce Store</title>
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -54,6 +55,15 @@
 </head>
 <body>
     <h1>My E-commerce Store</h1>
+    
+{% if messages %}
+    {% for message in messages %}
+        <p style="padding: 10px; background: #e8f5e9; color: #256029; border-radius: 5px;">
+            {{ message }}
+        </p>
+    {% endfor %}
+{% endif %}
+
     
 <p style="text-align: center;">
     <a href="{% url 'cart' %}">🛒 View Cart</a>
