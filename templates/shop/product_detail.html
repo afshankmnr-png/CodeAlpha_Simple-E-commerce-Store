@@ -63,6 +63,16 @@
         <p class="price">₹{{ product.price }}</p>
 
         <p>Available Stock: {{ product.stock }}</p>
+        
+{% if product.stock > 0 %}
+    <form action="{% url 'add_to_cart' product.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Add to Cart 🛒</button>
+    </form>
+{% else %}
+    <p>Out of stock</p>
+{% endif %}
+
 
         <a href="{% url 'product_list' %}">Back to Products</a>
     </div>
