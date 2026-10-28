@@ -71,6 +71,19 @@
     <a href="{% url 'product_list' %}">Home</a>
 </p>
 
+{% if user.is_authenticated %}
+    <p style="text-align: center;">
+        Welcome, {{ user.username }}!
+        <a href="{% url 'logout' %}">Logout</a>
+    </p>
+{% else %}
+    <p style="text-align: center;">
+        <a href="{% url 'login' %}">Login</a>
+        |
+        <a href="{% url 'register' %}">Register</a>
+    </p>
+{% endif %}
+
 
     <div class="products">
         {% for product in products %}
